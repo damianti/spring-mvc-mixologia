@@ -1,0 +1,51 @@
+<!-- users-list.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head th:insert="~{fragments.html :: head}">
+    <title>All Users</title>
+</head>
+<body>
+<!-- Include the header.html file -->
+<header th:insert="~{fragments.html::navbar}"></header>
+<div class="container py-5 ">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-10 ">
+            <div class="card bg-dark text-white rounded-4"  >
+                <div class="card-body p-5 ">
+                    <h2 class="text-center mb-4 text-warning border-warning border-bottom">Users</h2>
+                    <div class="row gx-4 px-4">
+                        <div th:each="user : ${users}" class="col-lg-6 col-md-12 col-sm-12 pb-4">
+                            <div  class="card text-bg-dark rounded-4 shadow-lg border-2 border-secondary ">
+                                <div class="card-header border-warning" >
+                                    <h3 class="text-center text-warning  " th:text="${user.username}"></h3>
+                                </div>
+                                <div class="card-body  mb-2" >
+                                    <p class="card-text " th:text="'Email: ' + ${user.email}"></p>
+                                    <p class="card-text " th:text="'Role: ' + ${user.role}"></p>
+                                    <p class="card-text " th:text="'Created On: ' + ${user.createdOn}"></p>
+                                    <p  class="card-text "th:text="'Updated On: ' + ${user.updatedOn}"></p>
+                                </div>
+
+                                <div class="card-footer border-secondary rounded d-flex justify-content-center ">
+                                    <a th:href="@{/users/admin/edit/{id}(id=${user.id})}" class="btn btn-outline-light me-2">Edit User</a>
+
+                                    <form th:action="@{/users/admin/delete/{id}(id=${user.id})}" method="post" onsubmit="return confirm('Are you sure you want to delete this User?');">
+                                        <input type="hidden" name="_method" value="DELETE"/>
+                                        <button type="submit" class="btn btn-outline-danger me-2">Delete User</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5><a href="/admin" class="link-warning m-3">Back to admin dashboard</a></h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:insert="~{fragments.html::footer}"></footer>
+<!-- Bootstrap JavaScript -->
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

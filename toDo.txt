@@ -1,0 +1,7 @@
+see if i want jdbc type of session store and
+
+count and show the number of active sessions to admins
+
+in register, if the user is in the db, return to the same page and show the user the error
+
+

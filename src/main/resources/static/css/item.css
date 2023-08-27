@@ -1,0 +1,27 @@
+.item-card-size {
+    min-height: 20rem;
+    max-height: 20rem;
+    min-width: 15rem;
+    max-width: 15rem;
+}
+.item-card-img-size {
+    min-height: 12rem;
+    max-height: 12rem;
+    min-width: 15rem;
+    max-width: 15rem;
+}
+
+.item-card-body-size {
+    min-height: 8rem;
+    max-height: 8rem;
+    min-width: 15rem;
+    max-width: 15rem;
+}
+
+
+.inverse-shadow {
+    shadow: 0 -10px 10px rgba(0, 0, 0, 0.1);
+}
+.border-bottom-warning {
+    border-bottom: 1px solid #ffc107 !important;  /* This is Bootstrap's warning color */
+}

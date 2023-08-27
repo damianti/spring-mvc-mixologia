@@ -1,0 +1,38 @@
+<!-- items-list.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head th:insert="~{fragments.html :: head}">
+  <title>Home</title>
+</head>
+<body >
+<!-- Include the navbar file -->
+<header th:insert="~{fragments.html::navbar}"></header>
+<div class="container py-5 ">
+  <div th:fragment= "items-list" class="card bg-dark text-white rounded-4 pt-4">
+    <div class="container card-body  ">
+      <div class="row gx-4 px-4">
+        <!-- Add the item sections here -->
+        <div th:each="item : ${items}" class="col-lg-3 col-md-6 col-sm-12 pb-4">
+          <section th:insert="~{item.html :: body}"></section>
+        </div>
+        <!-- Message for no items available -->
+        <div th:if="${noItemsMessage}" class="col-12">
+          <p class="text-white text-center" th:text="${noItemsMessage}"></p>
+        </div>
+
+        <!-- Display error message if exists -->
+        <div th:if="${errorMessage}" class="col-12">
+          <p class="text-danger text-center" th:text="${errorMessage}"></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<footer th:insert="~{fragments.html::footer}"></footer>
+<!-- Bootstrap JavaScript -->
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
+
+

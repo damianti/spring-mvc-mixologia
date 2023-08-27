@@ -1,0 +1,52 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+  <title>Item</title>
+    <style>
+        /* CSS for hover effect */
+        .card-title a:hover {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="card text-bg-dark rounded-4 shadow-lg border-2 border-secondary inverse-shadow">
+  <div class="card-header bg-white " >
+      <a th:href="@{/items/{itemId}(itemId=${item.id})}">
+    <img  th:src="${item.photoUrl}"  alt="card-img-top" class="img-fluid  d-block mx-auto mb-3 mh-40" style="min-height: 12rem; max-height: 12rem;">
+      </a> </div>
+    <div class="card-body  " style="min-height: 8rem; max-height: 8rem;">
+      <h6 class="card-title text-large"> <a th:href="@{/items/{itemId}(itemId=${item.id})}" class="link-warning "  th:text="${item.title} "></a></h6>
+           <p class="card-text " th:text="${item.categoryTitle}">Category Here</p>
+    </div>
+    <div class="card-footer border-warning rounded">
+        <ul th:with="fullStars=${(item.ratingAvg != null && item.ratingAvg != 0) ? (item.ratingAvg) / 2 : 1},
+    halfStars=${item.ratingAvg != null && item.ratingAvg % 2 != 0 ? 1 : 0},
+    emptyStars=${(item.ratingAvg == 10 ) ? 0 : (5 - fullStars.intValue() - halfStars.intValue())}"
+            class="list-inline small text-warning">
+
+            <li class="list-inline-item m-0" th:each="star : ${#numbers.sequence(1, fullStars.intValue())}">
+                <i class="bi bi-star-fill"></i>
+            </li>
+            <li class="list-inline-item m-0" th:if="${halfStars == 1}">
+                <i class="bi bi-star-half"></i>
+            </li>
+            <li class="list-inline-item m-0" th:if="${emptyStars.intValue() > 0}" th:each="star : ${#numbers.sequence(1, emptyStars.intValue())}">
+                <i class="bi bi-star"></i>
+            </li>
+        </ul>
+
+
+
+
+
+        <p class="card-text" th:text="${#temporals.format(item.createdOn, 'dd-MM-yyyy')}">Date and time placeholder</p>
+
+    </div>
+  </div>
+</body>
+</html>
+
+
+

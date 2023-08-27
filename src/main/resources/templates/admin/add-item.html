@@ -1,0 +1,66 @@
+<!-- admin/add-item.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head th:insert="~{fragments.html :: head}">
+  <title>Admin dashboard</title>
+</head>
+<body>
+<!-- Include the header.html file -->
+<header th:insert="~{fragments.html::navbar}"></header>
+<div class="container py-5 ">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-10 ">
+      <div class="card bg-dark text-white rounded-4" >
+        <div class="row card-body p-5 text-center">
+
+          <h2 class="fw-bold mb-4 text-warning border-warning border-bottom">Add New Item</h2>
+          <div class="col-2"></div>
+          <div class="col-8">
+            <form th:action="@{/items/admin/add}" th:object="${item}" method="post">
+              <div class="form-floating mb-4">
+                <input th:field="*{title}" type="text" class="form-control bg-dark text-light" id="inputTitle" name="title" placeholder="Item title" required>
+                <label for="inputTitle">Title</label>
+                <p class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</p>
+                <p class="text-danger" th:if="${titleExists}">This title is already in use</p>
+              </div>
+              <div class="form-floating mb-4">
+                <input th:field="*{photoUrl}" type="text" class="form-control bg-dark text-light" id="inputPhotoUrl" name="photoUrl" placeholder="Item title" required>
+                <label for="inputPhotoUrl">Photo url</label>
+                <p class="text-danger" th:if="${#fields.hasErrors('photoUrl')}" th:errors="*{photoUrl}">Photo url error</p>
+              </div>
+              <div class="form-floating mb-4">
+                <div class="form-floating">
+                  <select th:field="*{categoryTitle}" class="form-select bg-dark text-light" id="inputCategory" aria-label="Floating label select example" name="categoryTitle">
+                    <option value="" selected>Category</option>
+                    <option th:each="category : ${categories}" th:value="${category.title}" th:text="${category.title}"></option>
+
+                  </select>
+                  <label for="inputCategory">Category</label>
+                </div>
+                <p class="text-danger" th:if="${#fields.hasErrors('categoryTitle')}" th:errors="*{categoryTitle}">category title error</p>
+              </div>
+              <div class="form-floating mb-4">
+                <textarea th:field="*{content}" rows="5" class="form-control bg-dark text-light" id="inputContent" name="content" placeholder="Item title" required style="height: 180px"></textarea>
+                <label for="inputContent">Content</label>
+                <p class="text-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">content error</p>
+              </div>
+
+              <div class="m-3 text-danger" th:if="${param.error}">
+                Cannot add item, please try again later or check the server.
+              </div>
+
+
+              <button class="btn btn-outline-warning btn-lg px-5" type="submit">Create Item</button>
+            </form>
+          </div>
+        </div>
+     <h5><a href="/admin" class="link-warning m-3">Back to admin dashboard</a></h5>
+      </div>
+    </div>
+  </div>
+</div>
+<footer th:insert="~{fragments.html::footer}"></footer>
+<!-- Bootstrap JavaScript -->
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

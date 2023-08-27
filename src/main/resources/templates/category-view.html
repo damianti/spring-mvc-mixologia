@@ -1,0 +1,44 @@
+<!-- category-view.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head th:insert="~{fragments.html :: head}">
+  <title>Home</title>
+</head>
+<body>
+<!-- Include the header.html file -->
+<header th:insert="~{fragments.html::navbar}"></header>
+
+<div class="container py-5 ">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-10 ">
+      <div class="card bg-dark text-white rounded-4" >
+        <div class="row card-body p-5 ">
+          <h1 class="fw-bold text-center mb-4 text-warning border-warning border-bottom" th:text="${category.title}" >Category Title</h1>
+
+          <div sec:authorize="hasRole('ROLE_ADMIN')"class="d-flex justify-content-end mb-2">
+            <a th:href="@{/category/admin/edit/{id}(id=${category.id})}" class="btn btn-outline-light me-2">Edit Category</a>
+
+            <form th:action="@{/category/admin/delete/{id}(id=${category.id})}" method="post" onsubmit="return confirm('Are you sure you want to delete this category?');">
+              <input type="hidden" name="_method" value="DELETE"/>
+              <button type="submit" class="btn btn-outline-danger me-2">Delete Category</button>
+            </form>
+          </div>
+
+          <h2 ><a role="none" class="text-warning">Category Explanation</a></h2>
+          <p th:text="${category.categoryExplanation}" ></p>
+
+          <h2 class="border-warning border-top">Items in this Category</h2>
+
+          <section th:insert="~{items-list.html :: items-list}" ></section>
+          <a href="/category" class="link-warning">Back to Category List</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer th:insert="~{fragments.html::footer}"></footer>
+<!-- Bootstrap JavaScript -->
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

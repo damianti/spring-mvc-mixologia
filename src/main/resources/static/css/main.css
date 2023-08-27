@@ -1,0 +1,45 @@
+p.error {
+    font-weight: bold;
+    color: red;
+}
+
+div.logout {
+    float: right;
+}
+
+
+.container {
+    max-width: 960px;
+}
+
+.footer {
+    background-color: #f5f5f5;
+    padding: 60px 0;
+}
+
+body {
+    background-color: #f5f5f5; /* Light grey color */
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+
+.card-img-top {
+    height: 100px; /* or whatever height you prefer */
+    object-fit: cover; /* this will scale the image to cover the space without distorting its aspect ratio */
+}
+.card {
+    height: 100%; /* make cards same height */
+    display: flex;
+    flex-direction: column; /* make sure footer is at the bottom if the card stretches */
+}
+.card-footer {
+    margin-top: auto; /* push footer to the bottom */
+}
+
+
+.item-link {
+    color: #ff4500;
+    text-decoration: none;
+    font-weight: bold;
+}
